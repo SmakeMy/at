@@ -7,9 +7,9 @@ import (
 	"strings"
 	"time"
 
+	"github.com/SmakeMy/at/pdu"
+	"github.com/SmakeMy/at/sms"
 	"github.com/tarm/goserial"
-	"github.com/xlab/at/pdu"
-	"github.com/xlab/at/sms"
 )
 
 // BaudRate defines the default speed of serial connection.
@@ -138,7 +138,7 @@ func (d *Device) sanityCheck(initialized bool) error {
 	if d.cmdPort == nil {
 		return ErrClosed
 	}
-	if d.notifyPort == nil {
+	if d.notifyPort == nil && len(d.NotifyPort) > 0 {
 		return ErrClosed
 	}
 	if initialized {
